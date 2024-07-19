@@ -1,39 +1,29 @@
-# booleans
-is_authenticated = True
+# sets - unordered & unique elements
+ingredients = {"tofu", "avocado", "cherries", "pasta", "tofu"}
+print(ingredients)
 
-# print(is_authenticated)
-# print(not is_authenticated)
+# make a set using the set function around a list
+scores = set([100, 25, 38, 100, 27])
+print(scores)
 
-# comparison operators
-x, y = 5, 10
+# add and remove methods
+ingredients.add("tomato")
+ingredients.remove("cherries")
+ingredients.discard("apple")
 
-# print(x > y)
-# print(x < y)
-# print(x == y)
-# print(x != y)
-# print(x >= y)
-# print(x <= y)
+print(ingredients)
 
-# boolean operators & member checking
-x, y = True, False
+# joining sets (union)
+set_one = {1, 2, 3}
+set_two = {3, 4, 5}
 
-# print(x and y)
-# print(x or y)
+union_set = set_one.union(set_two)
+print(union_set)
 
-# falsy values --> 0 numbers and empty data structs
-# print(bool(0))
-# print(bool(""))
-# print(bool([]))
+# intersection (set of common elements)
+int_set = set_one.intersection(set_two)
+print(int_set)
 
-# truthy values --> everything else
-# print(bool(1))
-# print(bool("hello, ninjas"))
-# print(bool([100, 99, 98]))
-
-
-# evaluating strings
-name = "mario"
-
-print(name.startswith('m'))
-print(name.startswith('a'))
-print(name.endswith('o'))
+# frozen (immutable) sets
+ages = frozenset([19, 21, 35, 25])
+print(ages)
