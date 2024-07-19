@@ -1,25 +1,39 @@
-# dictionaries
-person = {
-  "name": "yoshi",
-  "age": 30,
-  "job": "egg collector"
-}
+# booleans
+is_authenticated = True
 
-print(person["name"])
-print(person["age"])
+# print(is_authenticated)
+# print(not is_authenticated)
 
-# methods
-print(person.get("name"))
+# comparison operators
+x, y = 5, 10
 
-print(person.keys())
-print(person.values())
-print("age" in person.keys())
+# print(x > y)
+# print(x < y)
+# print(x == y)
+# print(x != y)
+# print(x >= y)
+# print(x <= y)
 
-copied_person = person.copy()
-print("copied person:", copied_person)
+# boolean operators & member checking
+x, y = True, False
 
-person.update({"name": "mario", "age": 35})
-print("updated person:", person)
+# print(x and y)
+# print(x or y)
 
-person.clear()
-print('cleared person:', person)
+# falsy values --> 0 numbers and empty data structs
+# print(bool(0))
+# print(bool(""))
+# print(bool([]))
+
+# truthy values --> everything else
+# print(bool(1))
+# print(bool("hello, ninjas"))
+# print(bool([100, 99, 98]))
+
+
+# evaluating strings
+name = "mario"
+
+print(name.startswith('m'))
+print(name.startswith('a'))
+print(name.endswith('o'))
