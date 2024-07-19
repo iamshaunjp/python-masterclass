@@ -1,32 +1,34 @@
-# single line comment
+# lists
+names = ["mario", "peach", "luigi"]
 
-'''
-multi-line comments
-use double or single quotes x 3
-'''
+print(names[0])
+print(names[1])
+print('length of the list is:', len(names))
 
-# declaring variables
-name = "mario"
-age = 30
-height = 5.4
+# changing list values
+names[1] = "toad"
+print(names)
 
-name = "luigi"
-age = 32
-height = "Five ft, 4 in."
+# list methods
+names.append("bowser")
+print(names)
 
-# printing variables
-print(name, age, height)
+names.remove("luigi")
+print(names)
 
-# type errors
-print(name + " is " + str(age))
-print(10 + int("20"))
+names.sort()
+print(names)
 
-# string methods
-greeting = "  Hello, Ninjas!  "
+# tuples
+top_scores = (100, 95, 92, 92, 88, 85)
 
-print(len(greeting))
-print(greeting.strip())
-print(greeting.strip().lower())
-print(greeting.strip().upper())
-print(greeting.replace("Hello", "Yo").strip())
-print(greeting)
+print(top_scores[0])
+print(top_scores[2])
+print("the length of the tuple is:", len(top_scores))
+
+# tuples are immutable
+# top_scores[0] = 99
+
+# tuple methods
+print(top_scores.count(92))
+print(top_scores.index(85))
