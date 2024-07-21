@@ -1,19 +1,21 @@
-count = 0
+# for loops with lists --> iterate a collection or range
 
-# break
-# --> break out of loop
+names = ["yoshi", "mario", "luigi", "peach"] # iterable
 
-# while count < 10:
-#   if count == 5:
-#     break
-#   print(count)
-#   count += 1
+for name in names:
+  print(name)
 
-# continue
-# --> skip an iteration
+for name in names:
+  if name == 'luigi':
+    break
+  print(name)
 
-while count < 10:
-  count += 1
-  if count % 2 != 0:
+for name in names:
+  if name == 'mario':
     continue
-  print(count)
+  print(name)
+
+# for loop with strings
+
+for letter in "ninja":
+  print(letter.upper())
