@@ -1,25 +1,23 @@
-# example without error handling
+# CHALLENGE: Shopping list formatter
 
-# example 1
+shopping_list = []
 
-try:
-  number = int(input("Enter a number: "))
-  print('You entered:', number)
-except ValueError as e:
-  print('That is not a number')
-  print('error:', e)
-finally:
-  print('completed')
+# SECTION ONE - creating the shopping list
+while True:
+    
+  item = input("Enter an item (or 'q' to quit): ")
+  if item == 'q':
+    break
+  
+  # Challenge: ask user for price (int)
+  # handle any ValueError by printing a message, skipping a loop and asking for a new item
 
-# example 2
+  price = int(input("Enter the price (£) of the item: "))
 
-a = 10
-b = 0
+  shopping_list.append((item, price))
 
-try:
-  print(a / b)
-except ZeroDivisionError as e:
-  print('cannot divide a number by 10')
-  print('error:', e)
+# SECTION TWO - formatting the shopping list
+total = 0
 
-print('end of the file')
+# Challenge: use a for loop to print each item and price on its own line
+# after all items have been output, also print out the total price
