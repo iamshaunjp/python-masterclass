@@ -1,21 +1,18 @@
-# for loops with lists --> iterate a collection or range
+# for loops with ranges
 
-names = ["yoshi", "mario", "luigi", "peach"] # iterable
+for i in range(5):
+  print(i)
 
-for name in names:
-  print(name)
+for i in range(10, 20):
+  print(i)
 
-for name in names:
-  if name == 'luigi':
-    break
-  print(name)
+for i in range(10, 20, 2):
+  print(i)
 
-for name in names:
-  if name == 'mario':
-    continue
-  print(name)
+# negative steps
 
-# for loop with strings
+for i in range(10, 0, -1):
+  print(i)
 
-for letter in "ninja":
-  print(letter.upper())
+for i in range(20, 10, -2):
+  print(i)
