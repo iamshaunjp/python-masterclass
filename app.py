@@ -1,13 +1,13 @@
-score = int(input('Enter a score between 0 & 100: '))
+# while loops
 
-# conditional assignments / ternary
+# score = 0
 
-is_top_score = True if score >= 90 else False
-print('is_top_score: ', is_top_score)
+# while score < 10:
+#   print('the score is:', score)
+#   score += 1
 
-# nested ternary 
+user_input = ""
 
-temp = int(input('Enter a temp in celsius between 0 & 40: '))
-
-weather = "hot" if temp > 25 else ("mild" if temp > 15 else "cold")
-print('weather: ', weather)
+while user_input != "q":
+  user_input = input("Enter a letter or enter 'q' to quit: ")
+  print('You entered:', user_input)
