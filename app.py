@@ -1,13 +1,19 @@
-# while loops
+count = 0
 
-# score = 0
+# break
+# --> break out of loop
 
-# while score < 10:
-#   print('the score is:', score)
-#   score += 1
+# while count < 10:
+#   if count == 5:
+#     break
+#   print(count)
+#   count += 1
 
-user_input = ""
+# continue
+# --> skip an iteration
 
-while user_input != "q":
-  user_input = input("Enter a letter or enter 'q' to quit: ")
-  print('You entered:', user_input)
+while count < 10:
+  count += 1
+  if count % 2 != 0:
+    continue
+  print(count)
