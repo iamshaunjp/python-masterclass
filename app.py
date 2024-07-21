@@ -1,18 +1,17 @@
-# for loops with ranges
+# match case statements --> 3.10
 
-for i in range(5):
-  print(i)
+belt_color = input("What is your ninja belt color: ")
 
-for i in range(10, 20):
-  print(i)
-
-for i in range(10, 20, 2):
-  print(i)
-
-# negative steps
-
-for i in range(10, 0, -1):
-  print(i)
-
-for i in range(20, 10, -2):
-  print(i)
+match belt_color:
+  case "white":
+    print("Ninja Fledgling")
+  case "red":
+    print("Intermediate Ninja")
+  case "blue":
+    print("Advanced Ninja")
+  case "purple":
+    print("Pro Ninja")
+  case "black":
+    print("Master Ninja")
+  case _:
+    print("Belt color is unknown")
