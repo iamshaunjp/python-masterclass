@@ -1,13 +1,34 @@
-# defining functions
+# global & local variables
 
-def greet():
-  print("Hello, ninjas!")
+x = 10
 
-greet()
+def print_x():
+  global x
 
-def say_hello():
-  name = "mario"
-  return f"Hello {name}"
+  x = 5
+  print(f"x inside the print_x func is {x}")
 
-result = say_hello()
-print(result)
+def print_y():
+  y = 20
+  print(f"y inside the print_y func is {y}")
+
+print_y()
+print_x()
+print(f"global value of x is {x}")
+
+
+# scope within nested functions
+
+def outer():
+  age = 25
+
+  def inner():
+    nonlocal age
+
+    age = 30
+    print(f"age inside inner() is {age}")
+
+  inner()
+  print(f"age inside outer() is: {age}")
+  
+outer()
