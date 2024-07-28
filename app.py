@@ -1,24 +1,29 @@
-# use *args to accept any number of positional arguments
+# return values
 
-def print_total(*args):
-  print(*args)
-  
-  total = 0
-  for number in args:
-    total += number
-  print(f'the total is: {total}')
+def square(x):
+  return x * x
 
-print_total(50, 75)
-print_total(24, 35, 79, 100, 15)
+result = square(5)
+print(result)
 
-# use *kwargs to accept any number of keyword arguments
+# returning multiple values
 
-def print_ninja(**kwargs):
-  print(kwargs)
+def get_coords():
+  x = 25.5
+  y = 48.2
+  return x, y
 
-  for key, value in kwargs.items():
-    print(f"{key} -- {value}")
-  return
+x, y = get_coords()
+print(x, y)
 
-print_ninja(name="yoshi", age=25)
-print_ninja(first_name="mario", belt_color="white")
+# using return to break out of a function
+
+age = 19
+
+def do_something():
+  if age < 20:
+    return None
+  print(age)
+
+result = do_something()
+print(result)
