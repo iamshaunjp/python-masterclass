@@ -1,34 +1,23 @@
-# global & local variables
+# arguments
+def multiply(a, b):
+  return a * b
 
-x = 10
+result = multiply(7, 5)
+print(result)
 
-def print_x():
-  global x
+# named arguments
+def print_score(name, score):
+  print(f"{name} has a score of {score}")
 
-  x = 5
-  print(f"x inside the print_x func is {x}")
+print_score("yoshi", 75)
+print_score(score=90, name="mario")
 
-def print_y():
-  y = 20
-  print(f"y inside the print_y func is {y}")
+# default arguments
+def divide(a, b = 2):
+  return a / b
 
-print_y()
-print_x()
-print(f"global value of x is {x}")
+result = divide(20, 4)
+print(result)
 
-
-# scope within nested functions
-
-def outer():
-  age = 25
-
-  def inner():
-    nonlocal age
-
-    age = 30
-    print(f"age inside inner() is {age}")
-
-  inner()
-  print(f"age inside outer() is: {age}")
-  
-outer()
+result = divide(50)
+print(result)
