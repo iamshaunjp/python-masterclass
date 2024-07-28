@@ -1,23 +1,24 @@
-# arguments
-def multiply(a, b):
-  return a * b
+# use *args to accept any number of positional arguments
 
-result = multiply(7, 5)
-print(result)
+def print_total(*args):
+  print(*args)
+  
+  total = 0
+  for number in args:
+    total += number
+  print(f'the total is: {total}')
 
-# named arguments
-def print_score(name, score):
-  print(f"{name} has a score of {score}")
+print_total(50, 75)
+print_total(24, 35, 79, 100, 15)
 
-print_score("yoshi", 75)
-print_score(score=90, name="mario")
+# use *kwargs to accept any number of keyword arguments
 
-# default arguments
-def divide(a, b = 2):
-  return a / b
+def print_ninja(**kwargs):
+  print(kwargs)
 
-result = divide(20, 4)
-print(result)
+  for key, value in kwargs.items():
+    print(f"{key} -- {value}")
+  return
 
-result = divide(50)
-print(result)
+print_ninja(name="yoshi", age=25)
+print_ninja(first_name="mario", belt_color="white")
