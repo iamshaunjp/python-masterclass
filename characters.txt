@@ -1,4 +1,6 @@
-mario
-luigi
-peach
-bowser
+Mario
+Luigi
+Peach
+Yoshi
+Bowser
+Toad

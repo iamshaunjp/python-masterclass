@@ -1,25 +1,18 @@
-# reading files
+# writing data to files
 
-def read_file():
-  # open file
-  file = open('characters.txt', 'r')
+characters = ["Mario", "Luigi", "Peach", "Yoshi", "Bowser", "Toad"]
 
-  # read the file
-  content = file.read()
-  print(content)
+def write_characters_to_file(filename):
+  file = open(filename, 'w')
 
-  lines = file.readlines()
-  for line in lines:
-    print(line)
+  for c in characters:
+    file.write(c + "\n")
 
-  # close the file
   file.close()
 
-  return
 
 def main():
-  read_file()
-  return
+  write_characters_to_file('characters.txt')
 
 if __name__ == "__main__":
   main()
