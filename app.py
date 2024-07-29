@@ -1,22 +1,20 @@
-# appending to a file
+from pathlib import Path
 
-more_characters = ["Diddy Kong", "Donkey Kong", "Wario"]
+# pathlib module
 
-def write_characters_to_file(filename):
-  # open file
-  file = open(filename, 'a')
+file = open('characters.txt', 'r')
 
-  # append to file
-  for c in more_characters:
-    file.write(c + "\n")
+def create_path():
+  script_dir = Path(__file__).parent
 
-  # close file
-  file.close()
+  path = script_dir / 'characters'
+
+  path.mkdir(parents=True, exist_ok=True)
 
   return
 
 def main():
-  write_characters_to_file('characters.txt')
+  create_path()
 
 if __name__ == "__main__":
   main()
