@@ -1,15 +1,19 @@
-# writing data to files
+# appending to a file
 
-characters = ["Mario", "Luigi", "Peach", "Yoshi", "Bowser", "Toad"]
+more_characters = ["Diddy Kong", "Donkey Kong", "Wario"]
 
 def write_characters_to_file(filename):
-  file = open(filename, 'w')
+  # open file
+  file = open(filename, 'a')
 
-  for c in characters:
+  # append to file
+  for c in more_characters:
     file.write(c + "\n")
 
+  # close file
   file.close()
 
+  return
 
 def main():
   write_characters_to_file('characters.txt')
