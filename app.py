@@ -1,13 +1,24 @@
-from random import randint, shuffle
+# reading files
+
+def read_file():
+  # open file
+  file = open('characters.txt', 'r')
+
+  # read the file
+  content = file.read()
+  print(content)
+
+  lines = file.readlines()
+  for line in lines:
+    print(line)
+
+  # close the file
+  file.close()
+
+  return
 
 def main():
-  number = randint(1, 1000)
-  print(f"random number is {number}")
-
-  numbers = [1,2,3,4,5,6,7]
-  shuffle(numbers)
-  print(f"shuffled numbers: {numbers}")
-
+  read_file()
   return
 
 if __name__ == "__main__":
