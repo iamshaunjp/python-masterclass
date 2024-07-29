@@ -1,45 +1,23 @@
 from pathlib import Path
 
-# pathlib module
+def open_file():
+  path = Path(__file__).parent
+  path = path / 'does' / 'not' / 'exist.txt'
 
-file = open('characters.txt', 'r')
+  try:
+    file = path.open('r')
+    content = file.read()
+    print(content)
+    file.close()
+  except FileNotFoundError:
+    print(f"{path} does not exist")
+  except Exception as e:
+    print(f"Unexpected error: {e}")
 
-def create_path():
-  # directory path
-  script_dir = Path(__file__).parent
-
-  # file path
-  path = script_dir / 'characters'
-
-  # making the directory
-  path.mkdir(parents=True, exist_ok=True)
-
-  # making the file path
-  path = path / 'zelda.txt'
-
-  # file = path.open('w')
-  # file.write("Ganon")
-
-  # file = path.open('a')
-  # file.write('\nLink')
-
-  file = path.open('r')
-  content = file.read()
-  print(content)
-
-  file.close()
-
-  # convenience method for writing
-  path.write_text('Epona')
-
-  # convenience method for reading
-  content = path.read_text()
-  print(content)
-
-  return
+  print('end of function')
 
 def main():
-  create_path()
+  open_file()
 
 if __name__ == "__main__":
   main()
