@@ -1,31 +1,27 @@
 from pathlib import Path
-import json
-
-path = Path(__file__).parent / 'characters.json'
-
-characters = {
-  "characters": [
-    {"name": "Mario", "age": 25},
-    {"name": "Luigi", "age": 27},
-    {"name": "Peach", "age": 26},
-    {"name": "Bowser", "age": 35}
-  ]
-}
-
-def write_json():
-  with path.open('w') as file:
-    json.dump(characters, file, indent=2)
-  return
-
-def read_json():
-  with path.open('r') as file:
-    data = json.load(file)
-  return data
 
 def main():
-  write_json()
-  data = read_json()
-  print(data)
+  # get table number from user
+  try:
+    table_no = int(input("Table number: "))
+    print(f"Starting a tab for table {table_no}")
+  except:
+    print("Not a valid table number. Exiting program.")
+    return
+  
+  # create file path using table number
+  path = Path(__file__).parent / f"table_{table_no}.csv"
+  print(path)
+
+  # get items from user (drink name and price)
+
+  
+  # calculate the totals (total, tip, grand_total)
+
+
+  # create the csv
+
+  return
 
 if __name__ == "__main__":
   main()
