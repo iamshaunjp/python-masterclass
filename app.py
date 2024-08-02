@@ -1,4 +1,17 @@
 from pathlib import Path
+import csv
+
+def create_csv(path, drinks, total_cost, tip, grand_total):
+  with path.open('w', newline='') as file:
+    writer = csv.writer(file)
+
+    writer.writerow(["Drink name", "Cost"])
+    writer.writerows(drinks)
+    writer.writerow(['Total', total_cost])
+    writer.writerow(['Tip', tip])
+    writer.writerow(['Grand Total', grand_total])
+
+    print(f"The bar tab has been saved to {path}")
 
 def calculate_totals(drinks):
   total_cost = 0
@@ -43,16 +56,16 @@ def main():
 
   # get items from user (drink name and price)
   drinks = serve_user()
-  
+
   if not drinks:
     print("No drinks added. Exiting program.")
     return
-
 
   # calculate the totals (total, tip, grand_total)
   total_cost, tip, grand_total = calculate_totals(drinks)
 
   # create the csv
+  create_csv(path, drinks, total_cost, tip, grand_total)
 
   return
 
