@@ -1,5 +1,16 @@
 from pathlib import Path
 
+def calculate_totals(drinks):
+  total_cost = 0
+
+  for name, cost in drinks:
+    total_cost += cost
+
+  tip = total_cost * 0.20
+  grand_total = total_cost + tip
+
+  return total_cost, tip, grand_total
+
 def serve_user():
   drinks = []
 
@@ -33,8 +44,13 @@ def main():
   # get items from user (drink name and price)
   drinks = serve_user()
   
-  # calculate the totals (total, tip, grand_total)
+  if not drinks:
+    print("No drinks added. Exiting program.")
+    return
 
+
+  # calculate the totals (total, tip, grand_total)
+  total_cost, tip, grand_total = calculate_totals(drinks)
 
   # create the csv
 
