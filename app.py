@@ -1,73 +1,36 @@
-from pathlib import Path
-import csv
+# higher order functions -> more reusable & modular
 
-def create_csv(path, drinks, total_cost, tip, grand_total):
-  with path.open('w', newline='') as file:
-    writer = csv.writer(file)
+def ninja_action(action, x):
+  return action("ninja", x)
 
-    writer.writerow(["Drink name", "Cost"])
-    writer.writerows(drinks)
-    writer.writerow(['Total', total_cost])
-    writer.writerow(['Tip', tip])
-    writer.writerow(['Grand Total', grand_total])
+def attack(character, x):
+  return f"The {character} attacks with a strength of {x}"
 
-    print(f"The bar tab has been saved to {path}")
+def defend(character, x):
+  return f"The {character} defends with a block power of {x}"
 
-def calculate_totals(drinks):
-  total_cost = 0
+action_one = ninja_action(attack, 5)
+action_two = ninja_action(defend, 7)
+print(action_one)
+print(action_two)
 
-  for name, cost in drinks:
-    total_cost += cost
+# built-in higher order functions
+# 1 - map function
 
-  tip = total_cost * 0.20
-  grand_total = total_cost + tip
+moves = ['punch', 'kick', 'block', 'dodge']
 
-  return total_cost, tip, grand_total
+def make_move_powerful(move):
+  return f"{move.upper()}!!!"
 
-def serve_user():
-  drinks = []
+powerful_moves = map(make_move_powerful, moves)
+print(list(powerful_moves))
 
-  while True:
-    name = input("Drink name (or type 'f' to finish): ")
-    if name.lower() == 'f':
-      break
-    
-    try:
-      cost  = float(input(f"{name} price: "))
-    except ValueError:
-      print("The price must be a number")
-      continue
-    
-    drinks.append((name, cost))
+# 2 - filter function
 
-  return drinks
+scores = [20, 95, 45, 85, 90, 15, 55, 100, 10]
 
-def main():
-  # get table number from user
-  try:
-    table_no = int(input("Table number: "))
-    print(f"Starting a tab for table {table_no}")
-  except:
-    print("Not a valid table number. Exiting program.")
-    return
-  
-  # create file path using table number
-  path = Path(__file__).parent / f"table_{table_no}.csv"
+def is_high_score(score):
+  return score >= 90
 
-  # get items from user (drink name and price)
-  drinks = serve_user()
-
-  if not drinks:
-    print("No drinks added. Exiting program.")
-    return
-
-  # calculate the totals (total, tip, grand_total)
-  total_cost, tip, grand_total = calculate_totals(drinks)
-
-  # create the csv
-  create_csv(path, drinks, total_cost, tip, grand_total)
-
-  return
-
-if __name__ == "__main__":
-  main()
+high_scores = filter(is_high_score, scores)
+print(list(high_scores))
