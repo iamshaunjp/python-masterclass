@@ -1,23 +1,19 @@
-# decorators -> add functionality to another function
+# closures
+# a closure is a function that remembers values from its enclosing scope
 
-def luigi_move(func):
-  def wrapper():
-    print('Luigi is preparing a move...')
-    func()
-    print('Move complete!')
-  
-  return wrapper
+def move_factory(character_name):
+  uppercase_name = character_name.upper()
 
-def stealth_attack():
-  print("Performing a stealth attack!")
+  def print_move(move_name):
+    print(f"{uppercase_name} performs {move_name}!")
+    
+  return print_move
+
 
 def main():
-  stealth_attack()
+  ryu_move = move_factory('Ryu')
+
+  ryu_move("Sweeping Slash")
 
 if __name__ == "__main__":
   main()
-
-# real-world uses of decorators
-# --> @require_auth (check user auth before func conditionally runs)
-# --> @validate_input (check & validate func arguments before func runs)
-# --> @preprocess (modify func arguments to be in a specific format)
