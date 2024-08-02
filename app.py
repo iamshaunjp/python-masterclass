@@ -1,36 +1,20 @@
-# higher order functions -> more reusable & modular
+# lambda functions
 
-def ninja_action(action, x):
-  return action("ninja", x)
+def main():
+  # example 1
 
-def attack(character, x):
-  return f"The {character} attacks with a strength of {x}"
+  add_stuff = lambda x, y: 10 + x + y
+  result = add_stuff(5,7)
+  print(result)
 
-def defend(character, x):
-  return f"The {character} defends with a block power of {x}"
+  # example 2 - with built in HO function
 
-action_one = ninja_action(attack, 5)
-action_two = ninja_action(defend, 7)
-print(action_one)
-print(action_two)
+  scores = [20, 95, 45, 85, 90, 15, 55, 100, 10]
 
-# built-in higher order functions
-# 1 - map function
+  high_scores = filter(lambda score: score >= 90, scores)
+  print(high_scores)
+  print(list(high_scores))
 
-moves = ['punch', 'kick', 'block', 'dodge']
 
-def make_move_powerful(move):
-  return f"{move.upper()}!!!"
-
-powerful_moves = map(make_move_powerful, moves)
-print(list(powerful_moves))
-
-# 2 - filter function
-
-scores = [20, 95, 45, 85, 90, 15, 55, 100, 10]
-
-def is_high_score(score):
-  return score >= 90
-
-high_scores = filter(is_high_score, scores)
-print(list(high_scores))
+if __name__ == "__main__":
+  main()
