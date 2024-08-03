@@ -1,19 +1,23 @@
-# closures
-# a closure is a function that remembers values from its enclosing scope
+# classes
 
-def move_factory(character_name):
-  uppercase_name = character_name.upper()
-
-  def print_move(move_name):
-    print(f"{uppercase_name} performs {move_name}!")
-    
-  return print_move
-
+class User:
+  # constructor
+  def __init__(self, username, email):
+    self.username = username
+    self.email = email
+  
 
 def main():
-  ryu_move = move_factory('Ryu')
+  user_one = User("leo", "leo@netninja.dev")
+  user_two = User("raph", "raph@netninja.dev")
 
-  ryu_move("Sweeping Slash")
+  print("user 1:")
+  print(user_one.username, user_one.email)
+  print("user 2:")
+  print(user_two.username, user_two.email)
+
+  user_one.email = "leo4eva@netninja.dev"
+  print(user_one.email)
 
 if __name__ == "__main__":
   main()
