@@ -30,6 +30,24 @@ class BarTab:
     self.tip = self.total * 0.20
     self.grand_total = self.total + self.tip
 
+  def create_csv(self):
+    if not self.drinks:
+      print("No drinks added. Exiting program.")
+      return
+    
+    path = Path(__file__).parent / f"table_{self.table_number}.csv"
+
+    with path.open('w', newline='') as file:
+      writer = csv.writer(file)
+
+      writer.writerow(["Drink name", "Cost"])
+      writer.writerows(self.drinks)
+      writer.writerow(['Total', self.total])
+      writer.writerow(['Tip', self.tip])
+      writer.writerow(['Grand Total', self.grand_total])
+
+      print(f"The bar tab has been saved to {path}")
+
 
 def main():
   tab = BarTab('7')
@@ -37,7 +55,7 @@ def main():
 
   tab.serve_user()
   tab.calculate_totals()
-  print(tab.total, tab.tip, tab.grand_total)
+  tab.create_csv()
 
   return
 
