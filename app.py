@@ -1,63 +1,23 @@
-import csv
-from pathlib import Path
-
-class BarTab:
-  def __init__(self, table_number):
-    self.table_number = table_number
-    self.drinks = []
-    self.total = 0
-    self.tip = 0
-    self.grand_total = 0
-  
-  def serve_user(self):
-    while True:
-      name = input("Drink name (or type 'f' to finish): ")
-      if name.lower() == 'f':
-        break
-      
-      try:
-        cost  = float(input(f"{name} price: "))
-      except ValueError:
-        print("The price must be a number")
-        continue
-      
-      self.drinks.append((name, cost))
-
-  def calculate_totals(self):
-    for _, cost in self.drinks:
-      self.total += cost
-
-    self.tip = self.total * 0.20
-    self.grand_total = self.total + self.tip
-
-  def create_csv(self):
-    if not self.drinks:
-      print("No drinks added. Exiting program.")
-      return
-    
-    path = Path(__file__).parent / f"table_{self.table_number}.csv"
-
-    with path.open('w', newline='') as file:
-      writer = csv.writer(file)
-
-      writer.writerow(["Drink name", "Cost"])
-      writer.writerows(self.drinks)
-      writer.writerow(['Total', self.total])
-      writer.writerow(['Tip', self.tip])
-      writer.writerow(['Grand Total', self.grand_total])
-
-      print(f"The bar tab has been saved to {path}")
-
+import pendulum
 
 def main():
-  tab = BarTab('7')
-  print(f"New tab created for table {tab.table_number}")
+  pdt = pendulum.now()
+  print(pdt)
 
-  tab.serve_user()
-  tab.calculate_totals()
-  tab.create_csv()
+  # formatting with pendulum
+  print(pdt.format('DD/MM/YYYY'))
+  print(pdt.format('H:m A'))
+  print(pdt.to_day_datetime_string())
 
-  return
+  # other pendulum methods
+  pdt2 = pdt.add(days=1, months=2, years=3)
+  print(pdt2.to_day_datetime_string())
+
+  pdt3 = pdt.subtract(years=4, weeks=1)
+  print(pdt3.to_day_datetime_string())
+
+  pdt4 = pdt.set(year=1986, month=4)
+  print(pdt4.to_day_datetime_string())
 
 if __name__ == "__main__":
   main()
