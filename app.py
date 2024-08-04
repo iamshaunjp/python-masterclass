@@ -23,13 +23,21 @@ class BarTab:
       
       self.drinks.append((name, cost))
 
+  def calculate_totals(self):
+    for _, cost in self.drinks:
+      self.total += cost
+
+    self.tip = self.total * 0.20
+    self.grand_total = self.total + self.tip
+
 
 def main():
   tab = BarTab('7')
   print(f"New tab created for table {tab.table_number}")
 
   tab.serve_user()
-  print(tab.drinks)
+  tab.calculate_totals()
+  print(tab.total, tab.tip, tab.grand_total)
 
   return
 
