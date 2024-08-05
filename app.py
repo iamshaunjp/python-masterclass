@@ -1,24 +1,18 @@
-from urllib import request
-import json
 from rich import print_json
+import requests
 
 # fetching data
 def get_posts():
   url = 'https://jsonplaceholder.typicode.com/posts'
 
-  try:
-    with request.urlopen(url) as response:
-      data = response.read()
+  response = requests.get(url)
+  parsed_json = response.json()
 
-      parsed_json = json.loads(data)
-      return parsed_json
-  except:
-    print("could not fetch the data.")
-    return None
+  return parsed_json
   
 def main():
   posts = get_posts()
-  print_json(posts)
+  print_json(data=posts)
 
 if __name__ == "__main__":
   main()
