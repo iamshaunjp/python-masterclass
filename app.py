@@ -1,21 +1,25 @@
 from rich import print_json
 import requests
 
-# fetching data
-def get_posts(user_id=1):
+# POST requests
+def save_post(data):
   url = 'https://jsonplaceholder.typicode.com/posts'
-  params = {
-    "userId": user_id
-  }
 
-  response = requests.get(url, params=params)
-  parsed_json = response.json()
+  response = requests.post(url, json=data)
+  parsed_data = response.json()
 
-  return parsed_json
+  return parsed_data
   
 def main():
-  posts = get_posts(user_id=3)
-  print_json(data=posts)
+  response = save_post({
+    "title": "Mario Party!", 
+    "body": "Okie Dokie!", 
+    "userId": 1
+  })
+
+  print_json(data=response)
+
+  return
 
 if __name__ == "__main__":
   main()
