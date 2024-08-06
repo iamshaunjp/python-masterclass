@@ -1,25 +1,25 @@
-from rich import print_json
 import requests
+from rich import print_json
 
-# POST requests
-def save_post(data):
-  url = 'https://jsonplaceholder.typicode.com/posts'
+def get_something():
+    url = "https://jsonplaceholder.typicode.com/xyz"
 
-  response = requests.post(url, json=data)
-  parsed_data = response.json()
+    try:
+      response = requests.get(url)
 
-  return parsed_data
-  
-def main():
-  response = save_post({
-    "title": "Mario Party!", 
-    "body": "Okie Dokie!", 
-    "userId": 1
-  })
+      response.raise_for_status()
 
-  print_json(data=response)
+      parsed_data = response.json()
+      return parsed_data
+    
+    except requests.exceptions.HTTPError as error:
+      print(f"there was an HTTP error: {error}")
+    except requests.exceptions.RequestException as error:
+      print(f"there was an error: {error}")
 
-  return
+def main():  
+  data = get_something()
+  print_json(data=data)
 
 if __name__ == "__main__":
   main()
