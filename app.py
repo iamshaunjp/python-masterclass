@@ -1,5 +1,8 @@
 import requests
 from rich import print_json
+from pathlib import Path
+import csv
+import pendulum
 
 def get_geo_location(city):
   geo_url = 'http://api.openweathermap.org/geo/1.0/direct'
@@ -25,28 +28,35 @@ def get_forecast(lat, lon):
   return parsed_data
 
 def create_csv_report(city, forecast_data):
+  file_name = city.lower().replace(' ', '')
+  file_path = Path(__file__).parent / f"{file_name}.csv"
 
-  # complete challenge 2 here
+  with file_path.open('w', newline='') as file:
+    writer = csv.writer(file)
+    writer.writerow(["Date / Time", "Weather Description"])
+
+    for entry in forecast_data['list']:
+      datetime = entry['dt']
+      description = entry['weather'][0]['description']
+      pdt = pendulum.from_timestamp(datetime)
+
+      writer.writerow([pdt.to_day_datetime_string(), description])
 
   print(f'CSV weather report for {city} was created.')
 
 def main():
+
+  city  = input("Create weather report for which city?: ").strip()
+  coords = get_geo_location(city)[0]
   
-  # CHALLENGE 1 - get the coordinates & forecast of a user city
-  # --> ask the user what city they want the forecast report for in the terminal
-  # --> fetch the geo coords of the city using the get_geo_location function
-  # --> what happens when we try to get the coords of an invalid location?
-  # --> handle this scenario before trying to fetch the forecast_data of the city
+  if not coords:
+    print("That is not a valid city, sucker!")
+    return
+  
+  forecast_data = get_forecast(coords['lat'], coords['lon'])
+  print_json(data=forecast_data)
 
-  # complete challenge 1 here
-
-  # CHALLENGE 2 - use the forecast_data to create a CSV weather report
-  # --> invoke the create_csv_report function and pass the city & forecast_data as arguments
-  # --> create a file_path using the pathlib module, using the city name
-  # --> loop through the entries in the forecast_data list (use forecast_data['list'])
-  # --> write columns for the dt and the weather description
-  # --> use entry['dt'] & entry['weather'][0]['description'] to get those values
-  # --> bonus points for using pendulum (need to install) to format the dt values
+  create_csv_report(city, forecast_data)
 
   return
 
