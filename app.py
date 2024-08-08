@@ -1,64 +1,48 @@
-import requests
-from rich import print_json
-from pathlib import Path
-import csv
-import pendulum
+from bottle import run, route, response, template, static_file, request
 
-def get_geo_location(city):
-  geo_url = 'http://api.openweathermap.org/geo/1.0/direct'
-  geo_params = {
-    'q': city,
-    'appid': '28d4883cb180676d90561d43c5caa22f'
+# data
+ninjas = [
+  {
+    "name": "Yoshi",
+    "belt_color": "Black",
+    "special_move": "Shadow Strike"
+  },
+  {
+    "name": "Hattori",
+    "belt_color": "Green",
+    "special_move": "Tornado Blast"
+  },
+  {
+    "name": "Momochi",
+    "belt_color": "Blue",
+    "special_move": "Rain Leap"
   }
+]
 
-  response = requests.get(geo_url, params=geo_params)
-  parsed_data = response.json()
-  return parsed_data
+@route("/public/<filename:path>")
+def send_static(filename):
+  return static_file(filename, root="./static")
 
-def get_forecast(lat, lon):
-  weather_url = "https://api.openweathermap.org/data/2.5/forecast"
-  weather_params = {
-    'lat': lat,
-    'lon': lon,
-    'appid': '28d4883cb180676d90561d43c5caa22f'
-  }
+@route("/")
+def home():
+  return template('home', ninjas=ninjas)
 
-  response = requests.get(weather_url, params=weather_params)
-  parsed_data = response.json()
-  return parsed_data
+# api endpoints
+@route("/api/ninjas")
+def get_ninjas():
+  response.content_type = "application/json"
+  return {"data": ninjas}
 
-def create_csv_report(city, forecast_data):
-  file_name = city.lower().replace(' ', '')
-  file_path = Path(__file__).parent / f"{file_name}.csv"
+@route("/api/ninjas", method="POST")
+def add_ninja():
+  new_ninja = request.json
 
-  with file_path.open('w', newline='') as file:
-    writer = csv.writer(file)
-    writer.writerow(["Date / Time", "Weather Description"])
+  if isinstance(new_ninja, dict):
+    ninjas.append(new_ninja)
 
-    for entry in forecast_data['list']:
-      datetime = entry['dt']
-      description = entry['weather'][0]['description']
-      pdt = pendulum.from_timestamp(datetime)
+  response.content_type = "application/json"
+  return {"message": "Added a new ninja", "data": new_ninja}
 
-      writer.writerow([pdt.to_day_datetime_string(), description])
-
-  print(f'CSV weather report for {city} was created.')
-
-def main():
-
-  city  = input("Create weather report for which city?: ").strip()
-  coords = get_geo_location(city)[0]
-  
-  if not coords:
-    print("That is not a valid city, sucker!")
-    return
-  
-  forecast_data = get_forecast(coords['lat'], coords['lon'])
-  print_json(data=forecast_data)
-
-  create_csv_report(city, forecast_data)
-
-  return
-
-if __name__ == "__main__":
-  main()
+if __name__ == '__main__':
+  # use the run function to run the app
+  run(host="localhost", port=8080, debug=True, reloader=True)
